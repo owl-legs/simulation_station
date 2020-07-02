@@ -3,6 +3,11 @@
     #Expected Slope
     #Variance of Expected Slope
     #95% confidence interval
+import numpy as np
+import pandas as pd
+
+def split_data(data, K, N):
+    return(np.array_split(data[int(K):], N))
 
 def sample_var(batch):
     x_bar = np.mean(batch)
@@ -19,9 +24,7 @@ def ci_95(mu, var, N):
            mu + (1.96*(np.sqrt(var)/np.sqrt(N)))]
 
 def batch_means(data, K, N):
-    M = len(data)
-    
-    batches = split_data_2(data, K, N)
+    batches = split_data(data, K, N)
     av_slope = [slope(batch) for batch in batches]
 
     batch_averages = []
